@@ -11,6 +11,7 @@ import utilities.*;
 
 import datastructure.ArrayList;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class main {
@@ -22,9 +23,9 @@ public class main {
     //log object
     static Logger logger = LogManager.getLogger();
 
-    public static void mainMenu() {
+    public static void mainMenu() throws InputMismatchException {
         System.out.println("");
-        int choice;
+        int choice=0;
         while (true) {
             if(loginUsername==null) {
                 System.out.println("Welcome to Main Menu!!!");
@@ -32,8 +33,18 @@ public class main {
                 System.out.println("2. Register");
                 System.out.println("3. Quit");
                 System.out.print("Enter Your Choice : ");
-                choice = sc.nextInt();
-                sc.nextLine();
+                while (true){
+                    try{
+                        choice = sc.nextInt();
+                        sc.nextLine();
+                        break;
+                    }catch (InputMismatchException e){
+                        System.out.println("Please enter a number:");
+                        sc.nextLine();
+                        continue;
+                    }
+                }
+
                 switch (choice) {
                     case 1:
                         Login();
